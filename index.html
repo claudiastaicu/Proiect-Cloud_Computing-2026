@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CineSearch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131a;
+      --card: #1a1a24;
+      --border: #2a2a3a;
+      --accent: #e8b94f;
+      --accent2: #e85f4f;
+      --text: #f0f0f5;
+      --muted: #888899;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(180deg, #000 0%, transparent 100%);
+      padding: 2rem 2rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 3px;
+      color: var(--accent);
+      text-shadow: 0 0 30px rgba(232,185,79,0.4);
+    }
+
+    .logo span { color: var(--accent2); }
+
+    /* SEARCH */
+    .search-wrapper {
+      flex: 1;
+      max-width: 600px;
+      position: relative;
+    }
+
+    .search-wrapper input {
+      width: 100%;
+      padding: 0.75rem 1.25rem 0.75rem 3rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search-wrapper input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(232,185,79,0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .search-wrapper button {
+      position: absolute;
+      right: 0.4rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 50px;
+      padding: 0.45rem 1.1rem;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .search-wrapper button:hover { background: #f5ca6a; transform: translateY(-50%) scale(1.03); }
+    .search-wrapper button:active { transform: translateY(-50%) scale(0.98); }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem 2rem;
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      letter-spacing: 6px;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 300;
+    }
+
+    /* MAIN */
+    main { padding: 2rem; max-width: 1400px; margin: 0 auto; }
+
+    /* SECTION TITLE */
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 3px;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* CARD */
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-4px) scale(1.02);
+      border-color: var(--accent);
+      box-shadow: 0 8px 30px rgba(232,185,79,0.15);
+    }
+
+    .card img {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-no-img {
+      width: 100%;
+      aspect-ratio: 2/3;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+
+    .card-info { padding: 0.75rem; }
+
+    .card-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-meta {
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .rating {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-overlay.active { display: flex; }
+
+    .modal {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      max-width: 750px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      animation: modalIn 0.25s ease;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.95) translateY(10px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: var(--text);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background 0.2s;
+    }
+
+    .modal-close:hover { background: var(--accent2); }
+
+    .modal-backdrop {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 20px 20px 0 0;
+      display: block;
+    }
+
+    .modal-backdrop-placeholder {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, var(--surface), var(--border));
+      border-radius: 20px 20px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .modal-body { padding: 1.5rem; }
+
+    .modal-header {
+      display: flex;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .modal-poster {
+      width: 100px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid var(--border);
+    }
+
+    .modal-poster img { width: 100%; display: block; }
+
+    .modal-poster-placeholder {
+      width: 100px;
+      aspect-ratio: 2/3;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .modal-title-area h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.4rem;
+    }
+
+    .modal-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .tag {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .tag.accent { border-color: var(--accent); color: var(--accent); }
+
+    .modal-stats {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .stat { text-align: center; }
+    .stat-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: var(--accent);
+    }
+    .stat-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    .modal-plot {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+    }
+
+    .modal-detail-row {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .modal-detail-label { color: var(--muted); min-width: 80px; }
+
+    /* LOADER */
+    .loader {
+      display: none;
+      text-align: center;
+      padding: 3rem;
+      color: var(--muted);
+    }
+
+    .loader.active { display: block; }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* EMPTY STATE */
+    .empty {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--muted);
+    }
+
+    .empty-icon { font-size: 3rem; margin-bottom: 1rem; }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Cine<span>Search</span></div>
+  <div class="search-wrapper">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Caută un film..." />
+    <button onclick="searchMovies()">Caută</button>
+  </div>
+</header>
+
+<div class="hero" id="heroSection">
+  <h1>Descoperă filme</h1>
+  <p>Caută orice film și află detalii complete</p>
+</div>
+
+<main>
+  <div class="loader" id="loader">
+    <div class="spinner"></div>
+    <p>Se caută filme...</p>
+  </div>
+
+  <div id="resultsSection" style="display:none">
+    <div class="section-title" id="resultsTitle">Rezultate</div>
+    <div class="grid" id="resultsGrid"></div>
+  </div>
+
+  <div id="trendingSection">
+    <div class="section-title">Tendințe acum</div>
+    <div class="grid" id="trendingGrid"></div>
+  </div>
+</main>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+  const TMDB_KEY = '8bbd77348419af48a30565ec31a6f20b';
+  const OMDB_KEY = '45df9f6a';
+  const TMDB = 'https://api.themoviedb.org/3';
+  const IMG = 'https://image.tmdb.org/t/p/w500';
+  const IMG_BG = 'https://image.tmdb.org/t/p/w1280';
+
+  // Enter key search
+  document.getElementById('searchInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') searchMovies();
+  });
+
+  // Load trending on start
+  loadTrending();
+
+  async function loadTrending() {
+    const res = await fetch(`${TMDB}/trending/movie/week?api_key=${TMDB_KEY}&language=ro-RO`);
+    const data = await res.json();
+    renderGrid(data.results || [], 'trendingGrid');
+  }
+
+  async function searchMovies() {
+    const query = document.getElementById('searchInput').value.trim();
+    if (!query) return;
+
+    document.getElementById('heroSection').style.display = 'none';
+    document.getElementById('trendingSection').style.display = 'none';
+    document.getElementById('resultsSection').style.display = 'none';
+    document.getElementById('loader').classList.add('active');
+
+    try {
+      const res = await fetch(`${TMDB}/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}&language=ro-RO`);
+      const data = await res.json();
+      document.getElementById('loader').classList.remove('active');
+      document.getElementById('resultsTitle').textContent = `Rezultate pentru "${query}" (${data.total_results || 0})`;
+      document.getElementById('resultsSection').style.display = 'block';
+      renderGrid(data.results || [], 'resultsGrid');
+    } catch(e) {
+      document.getElementById('loader').classList.remove('active');
+      document.getElementById('resultsGrid').innerHTML = '<p style="color:var(--accent2)">Eroare la căutare. Verifică cheile API.</p>';
+      document.getElementById('resultsSection').style.display = 'block';
+    }
+  }
+
+  function renderGrid(movies, gridId) {
+    const grid = document.getElementById(gridId);
+    if (!movies.length) {
+      grid.innerHTML = '<div class="empty"><div class="empty-icon">🎬</div><p>Niciun film găsit.</p></div>';
+      return;
+    }
+    grid.innerHTML = movies.map(m => `
+      <div class="card" onclick="openModal(${m.id})">
+        ${m.poster_path
+          ? `<img src="${IMG}${m.poster_path}" alt="${m.title}" loading="lazy"/>`
+          : `<div class="card-no-img">🎬</div>`}
+        <div class="card-info">
+          <div class="card-title">${m.title}</div>
+          <div class="card-meta">
+            <span class="rating">★ ${m.vote_average ? m.vote_average.toFixed(1) : 'N/A'}</span>
+            <span>${m.release_date ? m.release_date.slice(0,4) : '—'}</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  async function openModal(id) {
+    document.getElementById('modalOverlay').classList.add('active');
+    document.getElementById('modalContent').innerHTML = `<div style="padding:3rem;text-align:center"><div class="spinner" style="margin:auto"></div></div>`;
+
+    try {
+      // TMDB details
+      const [detailRes, creditsRes] = await Promise.all([
+        fetch(`${TMDB}/movie/${id}?api_key=${TMDB_KEY}&language=ro-RO`),
+        fetch(`${TMDB}/movie/${id}/credits?api_key=${TMDB_KEY}`)
+      ]);
+      const movie = await detailRes.json();
+      const credits = await creditsRes.json();
+
+      // OMDb details (by IMDB id)
+      let omdb = {};
+      if (movie.imdb_id) {
+        try {
+          const omdbRes = await fetch(`https://www.omdbapi.com/?i=${movie.imdb_id}&apikey=${OMDB_KEY}`);
+          omdb = await omdbRes.json();
+        } catch(e) {}
+      }
+
+      const director = credits.crew?.find(c => c.job === 'Director');
+      const cast = credits.cast?.slice(0,4).map(a => a.name).join(', ') || '—';
+      const genres = movie.genres?.map(g => `<span class="tag">${g.name}</span>`).join('') || '';
+      const imdbRating = omdb.imdbRating && omdb.imdbRating !== 'N/A' ? omdb.imdbRating : null;
+      const rottenTomatoes = omdb.Ratings?.find(r => r.Source === 'Rotten Tomatoes');
+
+      document.getElementById('modalContent').innerHTML = `
+        ${movie.backdrop_path
+          ? `<img class="modal-backdrop" src="${IMG_BG}${movie.backdrop_path}" alt=""/>`
+          : `<div class="modal-backdrop-placeholder">🎬</div>`}
+        <div class="modal-body">
+          <div class="modal-header">
+            <div class="modal-poster">
+              ${movie.poster_path
+                ? `<img src="${IMG}${movie.poster_path}" alt="${movie.title}"/>`
+                : `<div class="modal-poster-placeholder">🎬</div>`}
+            </div>
+            <div class="modal-title-area">
+              <h2>${movie.title}</h2>
+              ${movie.tagline ? `<p style="color:var(--accent);font-style:italic;font-size:0.85rem;margin-bottom:0.5rem">"${movie.tagline}"</p>` : ''}
+              <div class="modal-tags">${genres}</div>
+            </div>
+          </div>
+
+          <div class="modal-stats">
+            <div class="stat">
+              <div class="stat-value">★ ${movie.vote_average?.toFixed(1) || 'N/A'}</div>
+              <div class="stat-label">TMDB</div>
+            </div>
+            ${imdbRating ? `<div class="stat"><div class="stat-value">${imdbRating}</div><div class="stat-label">IMDb</div></div>` : ''}
+            ${rottenTomatoes ? `<div class="stat"><div class="stat-value">${rottenTomatoes.Value}</div><div class="stat-label">Rotten Tomatoes</div></div>` : ''}
+            ${movie.runtime ? `<div class="stat"><div class="stat-value">${movie.runtime}'</div><div class="stat-label">Durată</div></div>` : ''}
+            ${movie.vote_count ? `<div class="stat"><div class="stat-value">${movie.vote_count.toLocaleString()}</div><div class="stat-label">Voturi</div></div>` : ''}
+          </div>
+
+          ${(omdb.Plot && omdb.Plot !== 'N/A') ? `<p class="modal-plot">${omdb.Plot}</p>` : movie.overview ? `<p class="modal-plot">${movie.overview}</p>` : ''}
+
+          <div class="modal-detail-row"><span class="modal-detail-label">Lansare</span><span>${movie.release_date || '—'}</span></div>
+          ${director ? `<div class="modal-detail-row"><span class="modal-detail-label">Regizor</span><span>${director.name}</span></div>` : ''}
+          <div class="modal-detail-row"><span class="modal-detail-label">Actori</span><span>${cast}</span></div>
+          ${omdb.Country ? `<div class="modal-detail-row"><span class="modal-detail-label">Țară</span><span>${omdb.Country}</span></div>` : ''}
+          ${movie.budget > 0 ? `<div class="modal-detail-row"><span class="modal-detail-label">Buget</span><span>$${movie.budget.toLocaleString()}</span></div>` : ''}
+          ${movie.revenue > 0 ? `<div class="modal-detail-row"><span class="modal-detail-label">Încasări</span><span>$${movie.revenue.toLocaleString()}</span></div>` : ''}
+        </div>
+      `;
+    } catch(e) {
+      document.getElementById('modalContent').innerHTML = '<div style="padding:2rem;color:var(--accent2)">Eroare la încărcarea detaliilor.</div>';
+    }
+  }
+
+  function closeModal(event) {
+    if (!event || event.target === document.getElementById('modalOverlay')) {
+      document.getElementById('modalOverlay').classList.remove('active');
+    }
+  }
+</script>
+</body>
+</html>
