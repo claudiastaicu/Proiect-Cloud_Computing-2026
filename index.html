@@ -26,10 +26,115 @@
       min-height: 100vh;
     }
 
-    /* HEADER */
+    /* ── AUTH SCREEN ── */
+    #authScreen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: radial-gradient(ellipse at center, #1a1a2e 0%, var(--bg) 70%);
+    }
+
+    .auth-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+
+    .auth-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      letter-spacing: 4px;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .auth-logo span { color: var(--accent2); }
+
+    .auth-subtitle {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+    }
+
+    .auth-tabs {
+      display: flex;
+      background: var(--surface);
+      border-radius: 10px;
+      padding: 4px;
+      margin-bottom: 1.5rem;
+    }
+
+    .auth-tab {
+      flex: 1;
+      padding: 0.5rem;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .auth-tab.active {
+      background: var(--accent);
+      color: #000;
+    }
+
+    .auth-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .auth-input:focus { border-color: var(--accent); }
+
+    .auth-btn {
+      width: 100%;
+      padding: 0.8rem;
+      background: var(--accent);
+      border: none;
+      border-radius: 10px;
+      color: #000;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      margin-top: 0.25rem;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .auth-btn:hover { background: #f5ca6a; }
+    .auth-btn:active { transform: scale(0.98); }
+
+    .auth-error {
+      color: var(--accent2);
+      font-size: 0.8rem;
+      margin-top: 0.75rem;
+      min-height: 1rem;
+    }
+
+    /* ── APP ── */
+    #appScreen { display: none; }
+
     header {
       background: linear-gradient(180deg, #000 0%, transparent 100%);
-      padding: 2rem 2rem 1rem;
+      padding: 1rem 2rem;
       display: flex;
       align-items: center;
       gap: 1rem;
@@ -37,103 +142,125 @@
       top: 0;
       z-index: 100;
       backdrop-filter: blur(10px);
+      flex-wrap: wrap;
     }
 
     .logo {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem;
+      font-size: 1.8rem;
       letter-spacing: 3px;
       color: var(--accent);
-      text-shadow: 0 0 30px rgba(232,185,79,0.4);
     }
 
     .logo span { color: var(--accent2); }
 
-    /* SEARCH */
     .search-wrapper {
       flex: 1;
-      max-width: 600px;
+      min-width: 200px;
+      max-width: 500px;
       position: relative;
     }
 
     .search-wrapper input {
       width: 100%;
-      padding: 0.75rem 1.25rem 0.75rem 3rem;
+      padding: 0.7rem 1rem 0.7rem 2.8rem;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 50px;
       color: var(--text);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-family: 'Inter', sans-serif;
       outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: border-color 0.2s;
     }
 
-    .search-wrapper input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(232,185,79,0.15);
-    }
+    .search-wrapper input:focus { border-color: var(--accent); }
 
     .search-icon {
       position: absolute;
-      left: 1rem;
+      left: 0.9rem;
       top: 50%;
       transform: translateY(-50%);
       color: var(--muted);
-      font-size: 1rem;
     }
 
     .search-wrapper button {
       position: absolute;
-      right: 0.4rem;
+      right: 0.35rem;
       top: 50%;
       transform: translateY(-50%);
       background: var(--accent);
       color: #000;
       border: none;
       border-radius: 50px;
-      padding: 0.45rem 1.1rem;
+      padding: 0.4rem 1rem;
       font-weight: 600;
       font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
+      transition: background 0.2s;
     }
 
-    .search-wrapper button:hover { background: #f5ca6a; transform: translateY(-50%) scale(1.03); }
-    .search-wrapper button:active { transform: translateY(-50%) scale(0.98); }
+    .search-wrapper button:hover { background: #f5ca6a; }
 
-    /* HERO */
-    .hero {
-      text-align: center;
-      padding: 4rem 2rem 2rem;
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-left: auto;
     }
 
-    .hero h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3rem, 8vw, 6rem);
-      letter-spacing: 6px;
-      line-height: 1;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 0.75rem;
-    }
-
-    .hero p {
+    .user-badge {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.8rem;
       color: var(--muted);
-      font-size: 1rem;
-      font-weight: 300;
     }
 
-    /* MAIN */
-    main { padding: 2rem; max-width: 1400px; margin: 0 auto; }
+    .user-badge strong { color: var(--accent); }
 
-    /* SECTION TITLE */
+    .logout-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 50px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.8rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .logout-btn:hover { border-color: var(--accent2); color: var(--accent2); }
+
+    .nav-tabs {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.75rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-tab {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 50px;
+      padding: 0.4rem 1rem;
+      font-size: 0.82rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-tab.active, .nav-tab:hover { border-color: var(--accent); color: var(--accent); }
+
+    main { padding: 1.5rem 2rem; max-width: 1400px; margin: 0 auto; }
+
     .section-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       letter-spacing: 3px;
       color: var(--muted);
       margin-bottom: 1.25rem;
@@ -142,21 +269,14 @@
       gap: 0.75rem;
     }
 
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-    /* GRID */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
       gap: 1.25rem;
     }
 
-    /* CARD */
     .card {
       background: var(--card);
       border-radius: 12px;
@@ -173,12 +293,7 @@
       box-shadow: 0 8px 30px rgba(232,185,79,0.15);
     }
 
-    .card img {
-      width: 100%;
-      aspect-ratio: 2/3;
-      object-fit: cover;
-      display: block;
-    }
+    .card img { width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block; }
 
     .card-no-img {
       width: 100%;
@@ -190,10 +305,10 @@
       font-size: 2.5rem;
     }
 
-    .card-info { padding: 0.75rem; }
+    .card-info { padding: 0.7rem; }
 
     .card-title {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
       margin-bottom: 0.3rem;
       white-space: nowrap;
@@ -202,19 +317,35 @@
     }
 
     .card-meta {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--muted);
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      justify-content: space-between;
     }
 
-    .rating {
-      color: var(--accent);
-      font-weight: 600;
+    .rating { color: var(--accent); font-weight: 600; }
+
+    .fav-btn {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: rgba(0,0,0,0.65);
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+      z-index: 2;
     }
 
-    /* MODAL */
+    .fav-btn:hover { transform: scale(1.2); }
+
     .modal-overlay {
       display: none;
       position: fixed;
@@ -248,13 +379,11 @@
 
     .modal-close {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
+      top: 1rem; right: 1rem;
       background: rgba(0,0,0,0.5);
       border: none;
       color: var(--text);
-      width: 36px;
-      height: 36px;
+      width: 36px; height: 36px;
       border-radius: 50%;
       font-size: 1.1rem;
       cursor: pointer;
@@ -268,124 +397,89 @@
     .modal-close:hover { background: var(--accent2); }
 
     .modal-backdrop {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      object-position: top;
+      width: 100%; height: 200px;
+      object-fit: cover; object-position: top;
       border-radius: 20px 20px 0 0;
       display: block;
     }
 
     .modal-backdrop-placeholder {
-      width: 100%;
-      height: 200px;
+      width: 100%; height: 200px;
       background: linear-gradient(135deg, var(--surface), var(--border));
       border-radius: 20px 20px 0 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-size: 4rem;
     }
 
     .modal-body { padding: 1.5rem; }
 
-    .modal-header {
-      display: flex;
-      gap: 1.25rem;
-      margin-bottom: 1.25rem;
-    }
+    .modal-header { display: flex; gap: 1.25rem; margin-bottom: 1.25rem; }
 
     .modal-poster {
-      width: 100px;
-      flex-shrink: 0;
-      border-radius: 10px;
-      overflow: hidden;
+      width: 100px; flex-shrink: 0;
+      border-radius: 10px; overflow: hidden;
       border: 2px solid var(--border);
     }
 
     .modal-poster img { width: 100%; display: block; }
 
     .modal-poster-placeholder {
-      width: 100px;
-      aspect-ratio: 2/3;
+      width: 100px; aspect-ratio: 2/3;
       background: var(--surface);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-size: 2rem;
     }
 
     .modal-title-area h2 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.8rem;
-      letter-spacing: 2px;
-      margin-bottom: 0.4rem;
+      font-size: 1.8rem; letter-spacing: 2px; margin-bottom: 0.4rem;
     }
 
-    .modal-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 0.6rem;
-    }
+    .modal-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
 
     .tag {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 50px;
       padding: 0.2rem 0.7rem;
-      font-size: 0.75rem;
-      color: var(--muted);
+      font-size: 0.75rem; color: var(--muted);
     }
 
-    .tag.accent { border-color: var(--accent); color: var(--accent); }
-
-    .modal-stats {
-      display: flex;
-      gap: 1.5rem;
-      margin-bottom: 1.25rem;
-      flex-wrap: wrap;
-    }
+    .modal-stats { display: flex; gap: 1.5rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
 
     .stat { text-align: center; }
-    .stat-value {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.4rem;
-      color: var(--accent);
-    }
+    .stat-value { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--accent); }
     .stat-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
 
     .modal-plot {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.7;
+      font-size: 0.9rem; color: var(--muted); line-height: 1.7;
       margin-bottom: 1rem;
-      border-left: 3px solid var(--accent);
-      padding-left: 1rem;
+      border-left: 3px solid var(--accent); padding-left: 1rem;
     }
 
-    .modal-detail-row {
-      display: flex;
-      gap: 0.5rem;
-      font-size: 0.85rem;
-      margin-bottom: 0.4rem;
-    }
-
+    .modal-detail-row { display: flex; gap: 0.5rem; font-size: 0.85rem; margin-bottom: 0.4rem; }
     .modal-detail-label { color: var(--muted); min-width: 80px; }
 
-    /* LOADER */
-    .loader {
-      display: none;
-      text-align: center;
-      padding: 3rem;
-      color: var(--muted);
+    .modal-fav-btn {
+      margin-top: 1.25rem;
+      padding: 0.6rem 1.5rem;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      border-radius: 50px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
     }
 
+    .modal-fav-btn:hover, .modal-fav-btn.active { background: var(--accent); color: #000; }
+
+    .loader { display: none; text-align: center; padding: 3rem; color: var(--muted); }
     .loader.active { display: block; }
 
     .spinner {
-      width: 40px;
-      height: 40px;
+      width: 40px; height: 40px;
       border: 3px solid var(--border);
       border-top-color: var(--accent);
       border-radius: 50%;
@@ -395,16 +489,9 @@
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* EMPTY STATE */
-    .empty {
-      text-align: center;
-      padding: 4rem 2rem;
-      color: var(--muted);
-    }
-
+    .empty { text-align: center; padding: 4rem 2rem; color: var(--muted); }
     .empty-icon { font-size: 3rem; margin-bottom: 1rem; }
 
-    /* SCROLLBAR */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
@@ -412,40 +499,80 @@
 </head>
 <body>
 
-<header>
-  <div class="logo">Cine<span>Search</span></div>
-  <div class="search-wrapper">
-    <span class="search-icon">🔍</span>
-    <input type="text" id="searchInput" placeholder="Caută un film..." />
-    <button onclick="searchMovies()">Caută</button>
-  </div>
-</header>
+<!-- AUTH -->
+<div id="authScreen">
+  <div class="auth-box">
+    <div class="auth-logo">Cine<span>Search</span></div>
+    <p class="auth-subtitle">Descoperă filme și salvează-ți favoritele</p>
 
-<div class="hero" id="heroSection">
-  <h1>Descoperă filme</h1>
-  <p>Caută orice film și află detalii complete</p>
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('login')">Autentificare</button>
+      <button class="auth-tab" onclick="switchTab('register')">Înregistrare</button>
+    </div>
+
+    <div id="loginForm">
+      <input class="auth-input" type="text" id="loginUser" placeholder="Utilizator" />
+      <input class="auth-input" type="password" id="loginPass" placeholder="Parolă" />
+      <button class="auth-btn" onclick="login()">Intră în cont</button>
+    </div>
+
+    <div id="registerForm" style="display:none">
+      <input class="auth-input" type="text" id="regUser" placeholder="Utilizator" />
+      <input class="auth-input" type="password" id="regPass" placeholder="Parolă" />
+      <input class="auth-input" type="password" id="regPass2" placeholder="Confirmă parola" />
+      <button class="auth-btn" onclick="register()">Creează cont</button>
+    </div>
+
+    <p class="auth-error" id="authError"></p>
+  </div>
 </div>
 
-<main>
-  <div class="loader" id="loader">
-    <div class="spinner"></div>
-    <p>Se caută filme...</p>
+<!-- APP -->
+<div id="appScreen">
+  <header>
+    <div class="logo">Cine<span>Search</span></div>
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Caută un film..." onkeydown="if(event.key==='Enter') searchMovies()" />
+      <button onclick="searchMovies()">Caută</button>
+    </div>
+    <div class="header-right">
+      <div class="user-badge">👤 <strong id="userDisplay"></strong></div>
+      <button class="logout-btn" onclick="logout()">Deconectare</button>
+    </div>
+  </header>
+
+  <div class="nav-tabs">
+    <button class="nav-tab active" id="tabTrending" onclick="showTab('trending')">🔥 Trending</button>
+    <button class="nav-tab" id="tabFavorites" onclick="showTab('favorites')">⭐ Favorite</button>
   </div>
 
-  <div id="resultsSection" style="display:none">
-    <div class="section-title" id="resultsTitle">Rezultate</div>
-    <div class="grid" id="resultsGrid"></div>
-  </div>
+  <main>
+    <div class="loader" id="loader">
+      <div class="spinner"></div>
+      <p>Se caută filme...</p>
+    </div>
 
-  <div id="trendingSection">
-    <div class="section-title">Tendințe acum</div>
-    <div class="grid" id="trendingGrid"></div>
-  </div>
-</main>
+    <div id="resultsSection" style="display:none">
+      <div class="section-title" id="resultsTitle">Rezultate</div>
+      <div class="grid" id="resultsGrid"></div>
+    </div>
+
+    <div id="trendingSection">
+      <div class="section-title">Tendințe acum</div>
+      <div class="grid" id="trendingGrid"></div>
+    </div>
+
+    <div id="favoritesSection" style="display:none">
+      <div class="section-title">Favoritele tale</div>
+      <div class="grid" id="favoritesGrid"></div>
+    </div>
+  </main>
+</div>
 
 <!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal" id="modal">
+  <div class="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div id="modalContent"></div>
   </div>
@@ -455,34 +582,109 @@
   const TMDB_KEY = '8bbd77348419af48a30565ec31a6f20b';
   const OMDB_KEY = '45df9f6a';
   const TMDB = 'https://api.themoviedb.org/3';
-  const IMG = 'https://image.tmdb.org/t/p/w500';
+  const IMG  = 'https://image.tmdb.org/t/p/w500';
   const IMG_BG = 'https://image.tmdb.org/t/p/w1280';
 
-  // Enter key search
-  document.getElementById('searchInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') searchMovies();
-  });
+  let currentUser = null;
 
-  // Load trending on start
-  loadTrending();
+  // ── USERS & STORAGE ──────────────────────────────
+  function getUsers() { return JSON.parse(localStorage.getItem('cs_users') || '{}'); }
+  function saveUsers(u) { localStorage.setItem('cs_users', JSON.stringify(u)); }
+  function getFavorites() { return JSON.parse(localStorage.getItem('cs_favs_' + currentUser) || '[]'); }
+  function saveFavorites(f) { localStorage.setItem('cs_favs_' + currentUser, JSON.stringify(f)); }
 
-  async function loadTrending() {
-    const res = await fetch(`${TMDB}/trending/movie/week?api_key=${TMDB_KEY}&language=ro-RO`);
-    const data = await res.json();
-    renderGrid(data.results || [], 'trendingGrid');
+  // ── AUTH ─────────────────────────────────────────
+  function switchTab(tab) {
+    document.getElementById('loginForm').style.display    = tab === 'login'    ? 'block' : 'none';
+    document.getElementById('registerForm').style.display = tab === 'register' ? 'block' : 'none';
+    document.querySelectorAll('.auth-tab').forEach((t, i) => t.classList.toggle('active', i === (tab === 'login' ? 0 : 1)));
+    document.getElementById('authError').textContent = '';
   }
 
+  function login() {
+    const user = document.getElementById('loginUser').value.trim();
+    const pass = document.getElementById('loginPass').value;
+    const users = getUsers();
+    if (!user || !pass) { showAuthError('Completează toate câmpurile.'); return; }
+    if (!users[user] || users[user] !== pass) { showAuthError('Utilizator sau parolă greșite.'); return; }
+    startSession(user);
+  }
+
+  function register() {
+    const user  = document.getElementById('regUser').value.trim();
+    const pass  = document.getElementById('regPass').value;
+    const pass2 = document.getElementById('regPass2').value;
+    const users = getUsers();
+    if (!user || !pass) { showAuthError('Completează toate câmpurile.'); return; }
+    if (pass !== pass2) { showAuthError('Parolele nu coincid.'); return; }
+    if (users[user])    { showAuthError('Utilizatorul există deja.'); return; }
+    if (pass.length < 4) { showAuthError('Parola trebuie să aibă minim 4 caractere.'); return; }
+    users[user] = pass;
+    saveUsers(users);
+    startSession(user);
+  }
+
+  function startSession(user) {
+    currentUser = user;
+    localStorage.setItem('cs_session', user);
+    document.getElementById('userDisplay').textContent = user;
+    document.getElementById('authScreen').style.display = 'none';
+    document.getElementById('appScreen').style.display  = 'block';
+    loadTrending();
+  }
+
+  function logout() {
+    localStorage.removeItem('cs_session');
+    currentUser = null;
+    document.getElementById('authScreen').style.display = 'flex';
+    document.getElementById('appScreen').style.display  = 'none';
+    document.getElementById('loginUser').value = '';
+    document.getElementById('loginPass').value = '';
+    document.getElementById('authError').textContent = '';
+  }
+
+  function showAuthError(msg) { document.getElementById('authError').textContent = msg; }
+
+  // Reloghează automat după refresh ─ PERSISTENȚĂ
+  window.addEventListener('load', () => {
+    const saved = localStorage.getItem('cs_session');
+    if (saved && getUsers()[saved]) startSession(saved);
+  });
+
+  // ── TABS ─────────────────────────────────────────
+  function showTab(tab) {
+    document.getElementById('tabTrending').classList.toggle('active', tab === 'trending');
+    document.getElementById('tabFavorites').classList.toggle('active', tab === 'favorites');
+    document.getElementById('trendingSection').style.display  = tab === 'trending'  ? 'block' : 'none';
+    document.getElementById('favoritesSection').style.display = tab === 'favorites' ? 'block' : 'none';
+    document.getElementById('resultsSection').style.display   = 'none';
+    if (tab === 'favorites') renderFavorites();
+  }
+
+  // ── TRENDING ─────────────────────────────────────
+  async function loadTrending() {
+    try {
+      const res  = await fetch(`${TMDB}/trending/movie/week?api_key=${TMDB_KEY}&language=ro-RO`);
+      const data = await res.json();
+      renderGrid(data.results || [], 'trendingGrid');
+    } catch(e) {
+      document.getElementById('trendingGrid').innerHTML = '<p style="color:var(--accent2)">Eroare. Verifică cheile API.</p>';
+    }
+  }
+
+  // ── SEARCH ───────────────────────────────────────
   async function searchMovies() {
     const query = document.getElementById('searchInput').value.trim();
     if (!query) return;
-
-    document.getElementById('heroSection').style.display = 'none';
     document.getElementById('trendingSection').style.display = 'none';
-    document.getElementById('resultsSection').style.display = 'none';
+    document.getElementById('favoritesSection').style.display = 'none';
+    document.getElementById('resultsSection').style.display  = 'none';
     document.getElementById('loader').classList.add('active');
+    document.getElementById('tabTrending').classList.add('active');
+    document.getElementById('tabFavorites').classList.remove('active');
 
     try {
-      const res = await fetch(`${TMDB}/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}&language=ro-RO`);
+      const res  = await fetch(`${TMDB}/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}&language=ro-RO`);
       const data = await res.json();
       document.getElementById('loader').classList.remove('active');
       document.getElementById('resultsTitle').textContent = `Rezultate pentru "${query}" (${data.total_results || 0})`;
@@ -490,71 +692,107 @@
       renderGrid(data.results || [], 'resultsGrid');
     } catch(e) {
       document.getElementById('loader').classList.remove('active');
-      document.getElementById('resultsGrid').innerHTML = '<p style="color:var(--accent2)">Eroare la căutare. Verifică cheile API.</p>';
+      document.getElementById('resultsGrid').innerHTML = '<p style="color:var(--accent2)">Eroare la căutare.</p>';
       document.getElementById('resultsSection').style.display = 'block';
     }
   }
 
+  // ── FAVORITES ────────────────────────────────────
+  function isFav(id) { return getFavorites().some(f => f.id === id); }
+
+  function toggleFav(movie, event) {
+    if (event) event.stopPropagation();
+    let favs = getFavorites();
+    if (isFav(movie.id)) {
+      favs = favs.filter(f => f.id !== movie.id);
+    } else {
+      favs.push({ id: movie.id, title: movie.title, poster_path: movie.poster_path, vote_average: movie.vote_average, release_date: movie.release_date });
+    }
+    saveFavorites(favs);
+    // update buton modal
+    const btn = document.getElementById('modalFavBtn');
+    if (btn) {
+      const faved = isFav(movie.id);
+      btn.textContent = faved ? '⭐ Salvat la favorite' : '☆ Adaugă la favorite';
+      btn.classList.toggle('active', faved);
+    }
+    // update buton pe card
+    document.querySelectorAll(`.fav-btn[data-id="${movie.id}"]`).forEach(b => {
+      b.textContent = isFav(movie.id) ? '⭐' : '☆';
+    });
+    // refresh favorites tab dacă e activ
+    if (document.getElementById('favoritesSection').style.display !== 'none') renderFavorites();
+  }
+
+  function renderFavorites() {
+    const favs = getFavorites();
+    if (!favs.length) {
+      document.getElementById('favoritesGrid').innerHTML =
+        '<div class="empty"><div class="empty-icon">⭐</div><p>Nu ai filme favorite încă.<br>Apasă ☆ pe orice film!</p></div>';
+      return;
+    }
+    renderGrid(favs, 'favoritesGrid');
+  }
+
+  // ── GRID ─────────────────────────────────────────
   function renderGrid(movies, gridId) {
     const grid = document.getElementById(gridId);
     if (!movies.length) {
       grid.innerHTML = '<div class="empty"><div class="empty-icon">🎬</div><p>Niciun film găsit.</p></div>';
       return;
     }
-    grid.innerHTML = movies.map(m => `
-      <div class="card" onclick="openModal(${m.id})">
-        ${m.poster_path
-          ? `<img src="${IMG}${m.poster_path}" alt="${m.title}" loading="lazy"/>`
-          : `<div class="card-no-img">🎬</div>`}
-        <div class="card-info">
-          <div class="card-title">${m.title}</div>
-          <div class="card-meta">
-            <span class="rating">★ ${m.vote_average ? m.vote_average.toFixed(1) : 'N/A'}</span>
-            <span>${m.release_date ? m.release_date.slice(0,4) : '—'}</span>
+    grid.innerHTML = movies.map(m => {
+      const mJson = JSON.stringify({id:m.id,title:m.title,poster_path:m.poster_path,vote_average:m.vote_average,release_date:m.release_date}).replace(/"/g,'&quot;');
+      return `
+        <div class="card" onclick="openModal(${m.id})">
+          <button class="fav-btn" data-id="${m.id}" onclick="toggleFav(JSON.parse(this.dataset.movie), event)" data-movie="${mJson}">
+            ${isFav(m.id) ? '⭐' : '☆'}
+          </button>
+          ${m.poster_path ? `<img src="${IMG}${m.poster_path}" alt="${m.title}" loading="lazy"/>` : `<div class="card-no-img">🎬</div>`}
+          <div class="card-info">
+            <div class="card-title">${m.title}</div>
+            <div class="card-meta">
+              <span class="rating">★ ${m.vote_average ? Number(m.vote_average).toFixed(1) : 'N/A'}</span>
+              <span>${m.release_date ? m.release_date.slice(0,4) : '—'}</span>
+            </div>
           </div>
-        </div>
-      </div>
-    `).join('');
+        </div>`;
+    }).join('');
   }
 
+  // ── MODAL ────────────────────────────────────────
   async function openModal(id) {
     document.getElementById('modalOverlay').classList.add('active');
-    document.getElementById('modalContent').innerHTML = `<div style="padding:3rem;text-align:center"><div class="spinner" style="margin:auto"></div></div>`;
+    document.getElementById('modalContent').innerHTML =
+      `<div style="padding:3rem;text-align:center"><div class="spinner" style="margin:auto"></div></div>`;
 
     try {
-      // TMDB details
       const [detailRes, creditsRes] = await Promise.all([
         fetch(`${TMDB}/movie/${id}?api_key=${TMDB_KEY}&language=ro-RO`),
         fetch(`${TMDB}/movie/${id}/credits?api_key=${TMDB_KEY}`)
       ]);
-      const movie = await detailRes.json();
+      const movie   = await detailRes.json();
       const credits = await creditsRes.json();
 
-      // OMDb details (by IMDB id)
       let omdb = {};
       if (movie.imdb_id) {
-        try {
-          const omdbRes = await fetch(`https://www.omdbapi.com/?i=${movie.imdb_id}&apikey=${OMDB_KEY}`);
-          omdb = await omdbRes.json();
-        } catch(e) {}
+        try { omdb = await (await fetch(`https://www.omdbapi.com/?i=${movie.imdb_id}&apikey=${OMDB_KEY}`)).json(); } catch(e) {}
       }
 
       const director = credits.crew?.find(c => c.job === 'Director');
-      const cast = credits.cast?.slice(0,4).map(a => a.name).join(', ') || '—';
-      const genres = movie.genres?.map(g => `<span class="tag">${g.name}</span>`).join('') || '';
-      const imdbRating = omdb.imdbRating && omdb.imdbRating !== 'N/A' ? omdb.imdbRating : null;
+      const cast     = credits.cast?.slice(0,4).map(a => a.name).join(', ') || '—';
+      const genres   = movie.genres?.map(g => `<span class="tag">${g.name}</span>`).join('') || '';
+      const imdbRating     = omdb.imdbRating && omdb.imdbRating !== 'N/A' ? omdb.imdbRating : null;
       const rottenTomatoes = omdb.Ratings?.find(r => r.Source === 'Rotten Tomatoes');
+      const favMovie = {id:movie.id,title:movie.title,poster_path:movie.poster_path,vote_average:movie.vote_average,release_date:movie.release_date};
+      const favJson  = JSON.stringify(favMovie).replace(/"/g,'&quot;');
 
       document.getElementById('modalContent').innerHTML = `
-        ${movie.backdrop_path
-          ? `<img class="modal-backdrop" src="${IMG_BG}${movie.backdrop_path}" alt=""/>`
-          : `<div class="modal-backdrop-placeholder">🎬</div>`}
+        ${movie.backdrop_path ? `<img class="modal-backdrop" src="${IMG_BG}${movie.backdrop_path}" alt=""/>` : `<div class="modal-backdrop-placeholder">🎬</div>`}
         <div class="modal-body">
           <div class="modal-header">
             <div class="modal-poster">
-              ${movie.poster_path
-                ? `<img src="${IMG}${movie.poster_path}" alt="${movie.title}"/>`
-                : `<div class="modal-poster-placeholder">🎬</div>`}
+              ${movie.poster_path ? `<img src="${IMG}${movie.poster_path}" alt="${movie.title}"/>` : `<div class="modal-poster-placeholder">🎬</div>`}
             </div>
             <div class="modal-title-area">
               <h2>${movie.title}</h2>
@@ -562,37 +800,33 @@
               <div class="modal-tags">${genres}</div>
             </div>
           </div>
-
           <div class="modal-stats">
-            <div class="stat">
-              <div class="stat-value">★ ${movie.vote_average?.toFixed(1) || 'N/A'}</div>
-              <div class="stat-label">TMDB</div>
-            </div>
+            <div class="stat"><div class="stat-value">★ ${movie.vote_average?.toFixed(1)||'N/A'}</div><div class="stat-label">TMDB</div></div>
             ${imdbRating ? `<div class="stat"><div class="stat-value">${imdbRating}</div><div class="stat-label">IMDb</div></div>` : ''}
             ${rottenTomatoes ? `<div class="stat"><div class="stat-value">${rottenTomatoes.Value}</div><div class="stat-label">Rotten Tomatoes</div></div>` : ''}
             ${movie.runtime ? `<div class="stat"><div class="stat-value">${movie.runtime}'</div><div class="stat-label">Durată</div></div>` : ''}
             ${movie.vote_count ? `<div class="stat"><div class="stat-value">${movie.vote_count.toLocaleString()}</div><div class="stat-label">Voturi</div></div>` : ''}
           </div>
-
-          ${(omdb.Plot && omdb.Plot !== 'N/A') ? `<p class="modal-plot">${omdb.Plot}</p>` : movie.overview ? `<p class="modal-plot">${movie.overview}</p>` : ''}
-
-          <div class="modal-detail-row"><span class="modal-detail-label">Lansare</span><span>${movie.release_date || '—'}</span></div>
+          ${(omdb.Plot&&omdb.Plot!=='N/A') ? `<p class="modal-plot">${omdb.Plot}</p>` : movie.overview ? `<p class="modal-plot">${movie.overview}</p>` : ''}
+          <div class="modal-detail-row"><span class="modal-detail-label">Lansare</span><span>${movie.release_date||'—'}</span></div>
           ${director ? `<div class="modal-detail-row"><span class="modal-detail-label">Regizor</span><span>${director.name}</span></div>` : ''}
           <div class="modal-detail-row"><span class="modal-detail-label">Actori</span><span>${cast}</span></div>
           ${omdb.Country ? `<div class="modal-detail-row"><span class="modal-detail-label">Țară</span><span>${omdb.Country}</span></div>` : ''}
-          ${movie.budget > 0 ? `<div class="modal-detail-row"><span class="modal-detail-label">Buget</span><span>$${movie.budget.toLocaleString()}</span></div>` : ''}
-          ${movie.revenue > 0 ? `<div class="modal-detail-row"><span class="modal-detail-label">Încasări</span><span>$${movie.revenue.toLocaleString()}</span></div>` : ''}
-        </div>
-      `;
+          ${movie.budget>0 ? `<div class="modal-detail-row"><span class="modal-detail-label">Buget</span><span>$${movie.budget.toLocaleString()}</span></div>` : ''}
+          ${movie.revenue>0 ? `<div class="modal-detail-row"><span class="modal-detail-label">Încasări</span><span>$${movie.revenue.toLocaleString()}</span></div>` : ''}
+          <button id="modalFavBtn" class="modal-fav-btn ${isFav(movie.id)?'active':''}"
+            onclick="toggleFav(JSON.parse(this.dataset.movie))" data-movie="${favJson}">
+            ${isFav(movie.id) ? '⭐ Salvat la favorite' : '☆ Adaugă la favorite'}
+          </button>
+        </div>`;
     } catch(e) {
       document.getElementById('modalContent').innerHTML = '<div style="padding:2rem;color:var(--accent2)">Eroare la încărcarea detaliilor.</div>';
     }
   }
 
   function closeModal(event) {
-    if (!event || event.target === document.getElementById('modalOverlay')) {
+    if (!event || event.target === document.getElementById('modalOverlay'))
       document.getElementById('modalOverlay').classList.remove('active');
-    }
   }
 </script>
 </body>
