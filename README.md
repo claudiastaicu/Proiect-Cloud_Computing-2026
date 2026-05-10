@@ -3,6 +3,7 @@ Grupa: 1147
 
 Link aplicatie: https://proiect-cloud-computing-2026.vercel.app
 Link repository: https://github.com/claudiastaicu/Proiect-Cloud_Computing-2026
+Link video youtube: https://youtu.be/PqnoajUVSlg
 
 1. Introducere
    CineSearch este o aplicatie web de tip Single Page Application (SPA) care integreaza trei servicii cloud externe prin intermediul unor API-uri REST. Utilizatorii se pot autentifica, pot cauta filme, pot vizualiza detalii complete (rating, actori, regizor, recenzii) si pot gestiona o lista personala de filme stocata in cloud. Aplicatia este publicata pe platforma Vercel si codul sursa este disponibil pe GitHub.
